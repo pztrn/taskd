@@ -15,6 +15,7 @@ RUN apk add --no-cache --virtual build-dependencies \
 	cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr ..; \
 	make; \
 	make install; \
+	cd .. && cp -r pki /usr/share/doc/taskd/; \
 	cd ../.. && rm -rf taskserver; \
 	apk del --purge build-dependencies; \
 	apk add --no-cache gnutls libuuid util-linux bash libgcc libstdc++; \

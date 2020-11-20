@@ -8,13 +8,17 @@ if [[ ! -w $TASKDDATA ]] ; then
     >&2 echo "  Did you set permissions on the volume correctly?"
 fi
 
-# Refresh example configuration
-if [[ -d $TASKDDATA/example ]] ; then
-    rm -rf "$TASKDDATA/example"
-fi
+# Do preliminary configuration if needed.
+if [[ ! -f $TASKDDATA/config ]] ; then
+    mkdir "$TASKDDATA"
 
-mkdir -p "$TASKDDATA/example" || exit 1
-taskd init --data "$TASKDDATA/example"
+    taskd init --data "$TASKDDATA"
+	taskd config --force server=0.0.0.0:53589
+
+	# Generating stub certificates that WILL BE INVALID.
+	# See taskd configuration guide for configuring it right.
+	/usr/share/doc/taskd/pki/generate
+fi
 
 # Print version and diagnostics to logs
 taskd diagnostics --data "$TASKDDATA"
