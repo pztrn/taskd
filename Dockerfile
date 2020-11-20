@@ -18,7 +18,7 @@ RUN apk add --no-cache --virtual build-dependencies \
 	cd .. && cp -r pki /usr/share/doc/taskd/; \
 	cd ../.. && rm -rf taskserver; \
 	apk del --purge build-dependencies; \
-	apk add --no-cache gnutls libuuid util-linux bash libgcc libstdc++; \
+	apk add --no-cache gnutls gnutls-utils libuuid util-linux bash libgcc libstdc++; \
 	mkdir /var/taskd && chmod +x /usr/bin/taskd.sh
 
 ENV TASKDATA /var/taskd
