@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM code.pztrn.name/containers/mirror/alpine:3.16.0
 
 COPY ./taskd.sh /usr/bin
 
